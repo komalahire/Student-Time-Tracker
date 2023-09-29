@@ -3,6 +3,7 @@ import "./App.css";
 // import ReactGA from "react-ga";
 // import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
+import Login from "./Pages/Login";
 // ReactGA.initialize("G-YBB9SYP3SQ");
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
 
   return (
     <div className="App">
-      <buton onClick={handleClick}>Login</buton>
+      <Login />
     </div>
   );
 }

@@ -59,7 +59,7 @@ const Pathways = () => {
         <Grid container spacing={3} align="center">
           {courses.map((course, index) => (
             <Grid item key={index} xs={12} md={3}>
-              <Link style={{ textDecoration: "none" }} to={"/" + course.id}>
+              <Link style={{ textDecoration: "none" }} to={"/" + course.name}>
                 <Card
                   sx={{
                     minWidth: "150px",

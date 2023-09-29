@@ -22,6 +22,8 @@ import get from "lodash/get";
 import DOMPurify from "dompurify";
 import axios from "axios";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { PATHS, interpolatePath } from "../../Routing/constant";
 
 
 const createVisulizeURL = (code, lang, mode) => {
@@ -70,10 +72,11 @@ const headingVarients = {};
 
 function PathwayExercise() {
    const [exercise, setExercise] = useState([]);
-   const [exerciseId, setExerciseId] = useState(exercise?.course?.exercises[0].id);
+   const {pathwayId,courseId, exerciseId} = useParams();
+  //  const [exerciseId, setExerciseId] = useState(exercise?.course?.exercises[0].id);
     useEffect(() => {
         // Make a GET request to the API endpoint
-        axios.get(`https://merd-api.merakilearn.org/courses/87/exercises`,{
+        axios.get(`https://merd-api.merakilearn.org/courses/${courseId}/exercises`,{
         headers: {
           accept: "application/json",
           Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI1NDYiLCJlbWFpbCI6InNhbG9uaTIwQG5hdmd1cnVrdWwub3JnIiwiaWF0IjoxNjk1OTY4MjY1LCJleHAiOjE3Mjc1MjU4NjV9.m_86yUBTal5sIBZF2iRg_0lbP7MzyhkH4i4iPErpLEs",
@@ -84,16 +87,16 @@ function PathwayExercise() {
           .then(response => {
             // Handle successful response
             setExercise(response.data);
-            setExerciseId(response.data.course.exercises[0].id);
+            // setExerciseId(response.data.course.exercises[0].id);
             console.log(response.data)
           })
           .catch(error => {
           
             console.error('Error fetching data:', error);
           });
-      }, []);
+      }, [courseId]);
     
-    
+    console.log(exercise,"exercise")
     return (
         <div>
             <Container maxWidth="lg" margin="64px 0px">
@@ -102,11 +105,14 @@ function PathwayExercise() {
               <Grid item xs={12} sm={12} md={10} lg={10}>
               {
               exercise?.course
-               && exercise.course.exercises.map((item) => {
+               && exercise?.course && exercise.course.exercises.map((item) => {
+                console.log(item,"item")
                 return(
                  item.id===exerciseId 
-                 && item.content.map((content) => (
+                 && item?.content.map((content) => (
+                  
                   <>
+                  
                     {content.component === "header" &&
                     <Box 
                     sx={{margin: "30px 0 10px 0", alignItems: "left",}}
@@ -193,11 +199,15 @@ function PathwayExercise() {
           }}
             >
             <Typography variant="h5">Course Content</Typography>
-                    {exercise?.course && exercise.course.exercises.map((item) => (
+                    {exercise?.course && exercise.course?.exercises?.map((item) => (
                        
                       <ListItem key={item.id} component="div" >
                     <ListItemButton 
-                         onClick={() => setExerciseId(item.id)}
+                          to={interpolatePath(PATHS.PATHWAY_COURSE_CONTENT, {
+                            courseId: courseId,
+                            exerciseId: item.id ,
+                            pathwayId: 1,
+                          })}
                          >
                       <ListItemText primary={item.name} />
                     </ListItemButton>

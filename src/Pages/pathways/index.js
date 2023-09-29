@@ -14,12 +14,15 @@ import {
 import axios from "axios";
 import Header from "../header.js";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { PATHS, interpolatePath } from "../../Routing/constant";
 const Pathways = () => {
   const [courses, setCourses] = useState([]);
+  const {pathwayId} = useParams();
   useEffect(() => {
     axios
       .get(
-        "https://merd-api.merakilearn.org/pathways/1/courses?courseType=json",{
+        `https://merd-api.merakilearn.org/pathways/1/courses?courseType=json`,{
         headers: {
           accept: "application/json",
           // Authorization: user?.data?.token,
@@ -36,11 +39,11 @@ const Pathways = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [pathwayId]);
   console.log(courses,"patttttttt")
   return (
     <>
-      <Header />
+      
       <h4 style={{textAlign: 'center'}}>Courses</h4>
       <div className="grid">
         {/* {courses.map((c) => (
@@ -58,7 +61,11 @@ const Pathways = () => {
         <Grid container spacing={3} align="center">
           {courses?.map((course, index) => (
             <Grid item key={index} xs={12} md={3}>
-            <Link to="/course-content">
+            <Link to={interpolatePath(PATHS.PATHWAY_COURSE_CONTENT, {
+                            courseId: course.id,
+                            exerciseId: 0,
+                            pathwayId: pathwayId,
+                          })}>
               <Card
                 sx={{
                   minWidth: "150px",

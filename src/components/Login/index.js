@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { auth, provider } from "./config";
 import { Button, Typography, Container } from "@material-ui/core";
 import GoogleIcon from "@mui/icons-material/Google";
-
+import { reactLocalStorage } from "reactjs-localstorage";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     // const auth = getAuth();
@@ -13,19 +15,21 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        // localStorage.setItem("token", user);
+        navigate("/");
+        reactLocalStorage.setObject("user", user);
       })
       .catch((error) => {
-        console.log(error);
-
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
       });
   };
 
-  // useEffect(() => {
-  //   setValue(localStorage.getItem("email"));
-  // });
+  useEffect(() => {
+    const user = reactLocalStorage.getObject("user");
+    if (Object.keys(user).length) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div style={{ marginTop: "10%" }}>
@@ -35,24 +39,28 @@ const Login = () => {
           style={{ marginTop: "8px", fontWeight: 800, fontSize: "20px" }}
           variant="h4"
           component="div"
-          gutterBottom>
+          gutterBottom
+        >
           {" "}
           Study<span style={{ color: "#ff0089" }}>Tracker</span>
         </Typography>
         <Typography
           style={{ marginTop: "10px", fontSize: "32px", fontWeight: "bold" }}
           variant="body2"
-          color="text.secondary">
+          color="text.secondary"
+        >
           😊 Les't get Started
         </Typography>
         <Typography
           style={{ marginTop: "23px", fontSize: "17px" }}
-          gutterBottom>
+          gutterBottom
+        >
           StudyTrackr is your all-in-one companion for monitoring and enhancing
           your learning journey.
         </Typography>
         {/* <button onClick={handleGoogleLogin}>Login with Google</button> */}
         <Button
+          className="google_button"
           style={{
             marginTop: "23px",
             fontSize: "15px",

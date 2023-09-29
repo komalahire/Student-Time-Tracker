@@ -12,32 +12,38 @@ import {
   CardContent,
 } from "@mui/material";
 
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { reactLocalStorage } from "reactjs-localstorage";
 import axios from "axios";
 import Header from "../header.js";
 
 const Pathways = () => {
   const [courses, setCourses] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(
-        `https://merd-api.merakilearn.org/pathways/1/courses
-        `,
-        {
-          headers: {
-            "version-code": 50,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response);
-        setCourses(response?.data?.courses);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const user = reactLocalStorage.getObject("user");
+    if (Object.keys(user).length === 0) {
+      navigate("/login");
+    } else {
+      axios
+        .get(
+          `https://merd-api.merakilearn.org/pathways/1/courses
+          `,
+          {
+            headers: {
+              "version-code": 50,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          setCourses(response?.data?.courses);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, []);
   return (
     <>

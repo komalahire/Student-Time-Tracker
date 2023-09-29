@@ -73,7 +73,14 @@ function PathwayExercise() {
    const [exerciseId, setExerciseId] = useState(exercise?.course?.exercises[0].id);
     useEffect(() => {
         // Make a GET request to the API endpoint
-        axios.get(`https://pratikdeshmukh2004.github.io/offline-meraki-web/data/exercises/data_types.json`)
+        axios.get(`https://merd-api.merakilearn.org/courses/87/exercises`,{
+        headers: {
+          accept: "application/json",
+          Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI1NDYiLCJlbWFpbCI6InNhbG9uaTIwQG5hdmd1cnVrdWwub3JnIiwiaWF0IjoxNjk1OTY4MjY1LCJleHAiOjE3Mjc1MjU4NjV9.m_86yUBTal5sIBZF2iRg_0lbP7MzyhkH4i4iPErpLEs",
+          "version-code":50,
+        },
+      }
+        )
           .then(response => {
             // Handle successful response
             setExercise(response.data);

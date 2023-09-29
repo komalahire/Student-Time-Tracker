@@ -10,14 +10,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   // const history = useHistory();
-
-  const handleClick = () => {
-    console.log("clicked");
-    window.gtag("event", "enroll", {
-      event_category: "Course Enrollment",
-      event_label: "Python",
-    });
-  };
+  
+ 
 
   return (
     <div className="App">

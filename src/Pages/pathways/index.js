@@ -19,17 +19,25 @@ const Pathways = () => {
   useEffect(() => {
     axios
       .get(
-        "https://merd-api.merakilearn.org/pathways/dropdown"
+        "https://merd-api.merakilearn.org/pathways/1/courses?courseType=json",{
+        headers: {
+          accept: "application/json",
+          // Authorization: user?.data?.token,
+          "version-code":50,
+        },
+      }
       )
+      
+      
       .then((response) => {
         console.log(response);
-        setCourses(response?.data);
+        setCourses(response?.data?.courses);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-  console.log(courses?.pathways,"patttttttt")
+  console.log(courses,"patttttttt")
   return (
     <>
       <Header />
@@ -48,7 +56,7 @@ const Pathways = () => {
           Courses
         </Typography>
         <Grid container spacing={3} align="center">
-          {courses?.pathways?.map((course, index) => (
+          {courses?.map((course, index) => (
             <Grid item key={index} xs={12} md={3}>
             <Link to="/course-content">
               <Card
@@ -68,7 +76,7 @@ const Pathways = () => {
                   src={course.logo}
                   alt="course"
                   style={{
-                    width: "100%",
+                    width: "200px",
                     height: "200px ",
                     borderRadius: "8px",
                     objectFit: "cover",
@@ -81,7 +89,8 @@ const Pathways = () => {
                     p: "0px 8px 0px 0px",
                   }}
                 >
-                  <Typography align="center" variant="body1">
+                  <Typography align="center" variant="body2" pt={2}
+                  style={{textDecoration:"none"}}>
                     {course.name}
                   </Typography>
                 </CardContent>

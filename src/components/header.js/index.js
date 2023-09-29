@@ -43,21 +43,17 @@ function Header() {
               alignItems: "center",
             }}
           >
-            <Link to="/">
-              <img
-                src={image}
-                loading="lazy"
-                alt="meraki"
-                sx={{ marginTop: "10px" }}
-              />
+            <Link style={{textDecoration: 'none'}} to="/">
+              <Typography
+                style={{ marginTop: "8px", fontWeight: 800, fontSize: "20px" }}
+                variant="h4"
+                component="div"
+                gutterBottom
+              >
+                {" "}
+                Study<span style={{ color: "#ff0089" }}>Tracker</span>
+              </Typography>
             </Link>
-            <Typography
-              variant="subtitle1"
-              component="div"
-              sx={{ color: "black" }}
-            >
-              Meraki Python course offline
-            </Typography>
           </Box>
         </Toolbar>
       </AppBar>

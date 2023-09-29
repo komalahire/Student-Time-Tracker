@@ -11,29 +11,25 @@ import {
   LinearProgress,
   CardContent,
 } from "@mui/material";
-
-
-
 import axios from "axios";
 import Header from "../header.js";
 import { Link } from "react-router-dom";
-
 const Pathways = () => {
   const [courses, setCourses] = useState([]);
-
   useEffect(() => {
     axios
       .get(
-        `https://pratikdeshmukh2004.github.io/offline-meraki-web/data/python_courses.json`
+        "https://merd-api.merakilearn.org/pathways/dropdown"
       )
       .then((response) => {
         console.log(response);
-        setCourses(response?.data?.courses);
+        setCourses(response?.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+  console.log(courses?.pathways,"patttttttt")
   return (
     <>
       <Header />
@@ -46,18 +42,16 @@ const Pathways = () => {
           </div>
         ))} */}
       </div>
-
-      <Container>
+     <Container>
         <Typography variant="h6" sx={{ mt: 8, ml: 2 }} align="left">
           {" "}
           Courses
         </Typography>
         <Grid container spacing={3} align="center">
-          {courses.map((course, index) => (
+          {courses?.pathways?.map((course, index) => (
             <Grid item key={index} xs={12} md={3}>
             <Link to="/course-content">
               <Card
-              
                 sx={{
                   minWidth: "150px",
                   borderRadius: "8px",
@@ -93,11 +87,10 @@ const Pathways = () => {
                 </CardContent>
               </Card>
               </Link>
-             
             </Grid>
           ))}
         </Grid>
-      </Container>
+        </Container>
     </>
   );
 };

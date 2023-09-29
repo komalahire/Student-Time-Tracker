@@ -29,28 +29,25 @@ const Login = () => {
 
   return (
     <div style={{ marginTop: "10%" }}>
-      <Container sx={{ width: "47px", textAlign: 'center', height: "47px" }} maxWidth="sm">
+      <Container style={{ textAlign: "center", height: "47px" }} maxWidth="sm">
         {/* <h1>Login</h1> */}
         <Typography
           style={{ marginTop: "8px", fontWeight: 800, fontSize: "20px" }}
           variant="h4"
           component="div"
-          gutterBottom
-        >
+          gutterBottom>
           {" "}
           Study<span style={{ color: "#ff0089" }}>Tracker</span>
         </Typography>
         <Typography
           style={{ marginTop: "10px", fontSize: "32px", fontWeight: "bold" }}
           variant="body2"
-          color="text.secondary"
-        >
-          Les't get Started
+          color="text.secondary">
+          😊 Les't get Started
         </Typography>
         <Typography
           style={{ marginTop: "23px", fontSize: "17px" }}
-          gutterBottom
-        >
+          gutterBottom>
           StudyTrackr is your all-in-one companion for monitoring and enhancing
           your learning journey.
         </Typography>

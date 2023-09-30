@@ -30,7 +30,6 @@ function Header() {
   const navigate = useNavigate();
   const classes = useStyles();
   const user = reactLocalStorage.getObject("user");
-  console.log(user, "user...");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {

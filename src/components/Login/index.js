@@ -14,7 +14,6 @@ const Login = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
-        console.log(user);
         navigate("/");
         reactLocalStorage.setObject("user", user);
       })

@@ -37,11 +37,7 @@ const Pathways = () => {
           }
         )
         .then((response) => {
-          console.log(response);
           setCourses(response?.data?.courses);
-        })
-        .catch((error) => {
-          console.log(error);
         });
     }
   }, []);

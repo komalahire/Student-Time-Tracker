@@ -73,6 +73,7 @@ function PathwayExercise() {
     exercise?.course?.exercises[0]?.id
   );
   const navigate = useNavigate();
+
   useEffect(() => {
     const user = reactLocalStorage.getObject("user");
     if (Object.keys(user).length === 0) {
@@ -80,12 +81,10 @@ function PathwayExercise() {
     } else {
       const url = `https://pratikdeshmukh2004.github.io/offline-meraki-web/data/exercises/${window.location.pathname}.json`;
       // Make a GET request to the API endpoint
-      console.log(url, "url...");
       axios
         .get(url)
         .then((response) => {
           // Handle successful response
-          console.log(response, "response...");
           setExerciseId(response.data?.course?.exercises[0]?.id);
           setExercise(response.data);
         })

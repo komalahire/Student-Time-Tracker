@@ -105,7 +105,7 @@ function PathwayExercise() {
                 return (
                   item.id === exerciseId &&
                   item.content.map((content) => (
-                    <>
+                    <div key={content.id}>
                       {content.component === "header" && (
                         <Box
                           sx={{ margin: "30px 0 10px 0", alignItems: "left" }}
@@ -177,7 +177,7 @@ function PathwayExercise() {
                           </Box>
                         </div>
                       )}
-                    </>
+                    </div>
                   ))
                 );
               })}

@@ -54,6 +54,17 @@ function Header() {
                 Study<span style={{ color: "#ff0089" }}>Tracker</span>
               </Typography>
             </Link>
+            <Link style={{textDecoration: 'none'}} to="/dashboard">
+              <Typography
+                style={{ marginTop: "8px", fontWeight: 800, fontSize: "20px" }}
+                variant="h4"
+                component="div"
+                gutterBottom
+              >
+                {" "}
+                Dashboard
+              </Typography>
+            </Link>
           </Box>
         </Toolbar>
       </AppBar>
